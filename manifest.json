@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "EH-VK Queue Manager",
+  "version": "1.1",
+  "description": "Send galleries to VK Bot Queue",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://e-hentai.org/*",
+    "*://exhentai.org/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "http://revoulce.mooo.com:*/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://e-hentai.org/*", "*://exhentai.org/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

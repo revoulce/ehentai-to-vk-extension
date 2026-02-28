@@ -1,0 +1,31 @@
+.eh-vk-btn {
+    background: #37474f;
+    color: #fff;
+    border: 1px solid #546e7a;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: arial, helvetica, sans-serif;
+    z-index: 100;
+}
+
+.eh-vk-btn:hover { background: #455a64; }
+.eh-vk-btn.success { background: #2e7d32; border-color: #1b5e20; }
+.eh-vk-btn.error { background: #c62828; border-color: #b71c1c; }
+
+.btn-large {
+    display: block;
+    width: 100px;
+    margin: 5px auto;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.btn-small {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    padding: 1px 4px;
+    opacity: 0.7;
+}
+.btn-small:hover { opacity: 1; }
