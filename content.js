@@ -23,7 +23,7 @@ function createButton(url, className) {
             btn.innerText = "X";
             btn.title = response ? response.error : "Unknown Error";
             btn.classList.add("error");
-            console.error("VK Bot Error:", response);
+            console.error("VK Bot Error:", response.error);
 
             // Allow retry after 2 seconds
             setTimeout(() => {
