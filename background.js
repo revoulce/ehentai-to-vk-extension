@@ -1,7 +1,6 @@
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.type === "QUEUE_GALLERY") {
 
-        // 1. Read config from storage
         chrome.storage.sync.get(
             { apiUrl: "http://localhost:8080/api/queue", apiSecret: "" },
             (items) => {
@@ -11,17 +10,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                     return;
                 }
 
-                // 2. Perform Request
                 fetch(items.apiUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${items.apiSecret}`
                     },
-                    body: JSON.stringify({ url: msg.url })
+                    body: JSON.stringify({
+                        url: msg.url,
+                        include_cosplayer: msg.includeCosplayer ?? false
+                    })
                 })
                     .then(async (res) => {
-                        // Handle non-JSON responses (e.g. 404/500 html pages)
                         const text = await res.text();
                         try {
                             const data = JSON.parse(text);
@@ -36,6 +36,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
             }
         );
 
-        return true; // Keep channel open for async response
+        return true;
     }
 });

@@ -15,7 +15,7 @@
 .btn-large {
     display: block;
     width: 100px;
-    margin: 5px auto;
+    margin: 5px auto 3px;
     padding: 5px;
     font-size: 14px;
 }
@@ -29,3 +29,33 @@
     opacity: 0.7;
 }
 .btn-small:hover { opacity: 1; }
+
+.eh-vk-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.eh-vk-cosplayer-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 11px;
+    color: #aaa;
+    user-select: none;
+    margin-top: 2px;
+}
+
+.eh-vk-cosplayer-label:hover {
+    color: #ddd;
+}
+
+.eh-vk-cosplayer-checkbox {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #5c6bc0;
+}

@@ -10,10 +10,13 @@ function createButton(url, className) {
         btn.disabled = true;
         btn.innerText = "...";
 
-        // No config needed here, background script handles it
+        const toggle = document.getElementById("eh-vk-cosplayer-toggle");
+        const includeCosplayer = toggle ? toggle.checked : false;
+
         const response = await chrome.runtime.sendMessage({
             type: "QUEUE_GALLERY",
-            url: url
+            url: url,
+            includeCosplayer: includeCosplayer
         });
 
         if (response && response.success) {
@@ -25,7 +28,6 @@ function createButton(url, className) {
             btn.classList.add("error");
             console.error("VK Bot Error:", response.error);
 
-            // Allow retry after 2 seconds
             setTimeout(() => {
                 btn.disabled = false;
                 btn.innerText = "VK";
@@ -36,15 +38,38 @@ function createButton(url, className) {
     return btn;
 }
 
+function createCosplayerToggle() {
+    const wrapper = document.createElement("label");
+    wrapper.className = "eh-vk-cosplayer-label";
+    wrapper.title = "Include cosplayer tag in VK post";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "eh-vk-cosplayer-toggle";
+    checkbox.className = "eh-vk-cosplayer-checkbox";
+
+    const span = document.createElement("span");
+    span.innerText = "cosplayer";
+
+    wrapper.appendChild(checkbox);
+    wrapper.appendChild(span);
+    return wrapper;
+}
+
 function init() {
-    // Gallery Header
     const header = document.querySelector("h1#gn");
     if (header) {
         const btn = createButton(window.location.href, "btn-large");
-        header.parentNode.insertBefore(btn, header.nextSibling);
+        const toggle = createCosplayerToggle();
+
+        const container = document.createElement("div");
+        container.className = "eh-vk-controls";
+        container.appendChild(btn);
+        container.appendChild(toggle);
+
+        header.parentNode.insertBefore(container, header.nextSibling);
     }
 
-    // List View
     document.querySelectorAll(".gl1t").forEach(item => {
         const link = item.querySelector("a");
         const wrapper = item.querySelector(".gl3t");
